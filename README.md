@@ -19,7 +19,7 @@ but this hasn't been fixed yet.
 Build Image
 -----------
 
-    $ docker build -t dajobe/hbase .
+    $ docker build -t uscisii2/hbase .
 
 
 Pull image
@@ -27,31 +27,26 @@ Pull image
 
 If you want to pull the image already built then use this
 
-    $ docker pull dajobe/hbase
+    $ docker pull uscisii2/hbase
 
-More details at https://hub.docker.com/r/dajobe/hbase/
+More details at https://hub.docker.com/r/uscisii2/hbase/
 
+
+HBASE environment settings
+---------
+
+```
+change hbase-env.sh if you want to update the settings like heap etc
+```
 
 Run HBase
 ---------
 
 To run HBase by hand:
 
-    $ mkdir data
-    $ id=$(docker run --name=hbase-docker -h hbase-docker -d -v $PWD/data:/data dajobe/hbase)
-
-To run it and adjust the host system's locally by editing
-`/etc/hosts` to alias the DNS hostname 'hbase-docker' to the
-container, use this:
-
-    $ ./start-hbase.sh
-
-This will require you to enter your sudo password to edit the host
-machine's `/etc/hosts` file
-
-If you want to run multiple hbase dockers on the same host, you can
-give them different hostnames with the '-h' / '--hostname' argument.
-You may have to give them different ports though.  Not tested.
+```
+docker run -d -p 9090:9090 -p 2181:2181 -v /path/to/hbase_storage:/data uscisii2/hbase
+```
 
 
 Find Hbase status
